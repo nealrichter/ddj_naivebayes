@@ -35,3 +35,9 @@ perl naivebayes.pl export <file>
 
 Hash with two levels of keys: $words{category}{word} gives count of
 'word' in 'category'.  Tied to a DB_File to keep it persistent.
+
+
+TODO:
+1) add model import from CSV
+2) add TFIDF and normalize with Hadoop implementations
+
