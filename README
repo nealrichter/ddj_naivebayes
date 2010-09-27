@@ -1,0 +1,37 @@
+
+Dr. Dobb's Journal
+May 01, 2005
+Naive Bayesian Text Classification
+Fast, accurate, and easy to implement
+John Graham-Cumming
+http://www.ddj.com/development-tools/184406064
+
+Extended by Neal Richter
+ - parse CSV text and treat phrases as intact symbols
+ - export the model to CSV file
+ - print stats on the model
+ - prune the model
+
+Neal's notes
+To Train:
+find label1/training/ -exec perl naivebayes.pl add label1 '{}' \;
+find label2/training/ -exec perl naivebayes.pl add label2 '{}' \;
+
+To Test:
+perl naivebayes.pl classify label1/testing/somedatafile
+perl naivebayes.pl classify label2/testing/somedatafile
+The label with the smallest number wins (ie the first one in the list)
+
+Paying attention to the absolute difference between the scores is important as well.  See the Naive Bayes literature for details.
+
+To Prune - removes words in the model with less than X frequency:
+perl naivebayes.pl prune 10
+
+To show stats:
+perl naivebayes.pl stats
+
+To export the model to a CSV file
+perl naivebayes.pl export <file>
+
+Hash with two levels of keys: $words{category}{word} gives count of
+'word' in 'category'.  Tied to a DB_File to keep it persistent.
